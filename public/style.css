@@ -1,0 +1,50 @@
+a {
+  color: white;
+}
+a:hover {
+  color: white;
+}
+h6 {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+li {
+  color: white;
+  list-style: none;
+}
+input {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 2rem;
+}
+
+.header {
+  background-color: rgba(131, 42, 131, 0.808);
+}
+.boton {
+  background-color: rgba(131, 42, 131, 0.808);
+  padding: 0.5rem;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  color: white;
+}
+.boton:hover {
+  background-color: rgb(131, 42, 131);
+}
+.alerta {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0.5rem;
+  color: white;
+}
+.error {
+  background-color: rgb(161, 20, 20);
+}
+.exito {
+  background-color: rgb(20, 150, 20);
+}
+span .navbar-toggler-icon{
+  background-color: white !important;
+}
