@@ -1,7 +1,12 @@
 <?php
-//echo "<pre>";
-//var_dump($_POST);
-//echo "</pre>";
+require '../includes/funciones.php';
+$auth = estaAutenticado();
+
+
+if (!$auth) {
+  header('Location: ../index.php');
+}
+
 
 //Base de datos
 require '../includes/config/database.php';

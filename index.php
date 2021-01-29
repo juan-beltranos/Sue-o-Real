@@ -1,4 +1,9 @@
 <?php
+
+if (!isset($_SESSION)) {
+  session_start();
+}
+
 $limite = 9;
 
 //importar bd
@@ -50,7 +55,7 @@ $resultado = mysqli_query($db, $query);
               <a class="nav-link" href="#">Pijamas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Iniciar Sesion</a>
+              <a class="nav-link" href="login.php">Iniciar Sesion</a>
             </li>
           </ul>
         </div>
