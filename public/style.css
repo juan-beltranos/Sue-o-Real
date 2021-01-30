@@ -45,6 +45,9 @@ input {
 .exito {
   background-color: rgb(20, 150, 20);
 }
-span .navbar-toggler-icon{
+span .navbar-toggler-icon {
   background-color: white !important;
+}
+.nav-link:hover {
+  background-color: rgb(97, 32, 97) !important;
 }

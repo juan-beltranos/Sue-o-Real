@@ -1,47 +1,28 @@
 <?php
-require '../../includes/funciones.php';
+
+require './includes/funciones.php';
 $auth = estaAutenticado();
 
 
 if (!$auth) {
-  header('Location: ../index.php');
-}
-
-// Validar la URL por ID válido
-$id = $_GET['id'];
-$id = filter_var($id, FILTER_VALIDATE_INT);
-
-if (!$id) {
-    header('Location: ../../admin');
+    header('Location: ./index.php');
 }
 
 //Base de datos
-require '../../includes/config/database.php';
+require './includes/config/database.php';
 $db = conectarDB();
 
-// Obtener los datos de la propiedad
-$consulta = "SELECT * FROM pijamas WHERE id_pijama = ${id}";
-$resultado = mysqli_query($db, $consulta);
-$pijama = mysqli_fetch_assoc($resultado);
-
-//echo "<pre>";
-//var_dump($pijama);
-//echo "</pre>";
-
-//consultar para obtener las categorias
+//consultar para obtener los vendedores
 $consulta = "SELECT * FROM categoria";
 $resultado = mysqli_query($db, $consulta);
 
 //Arreglo con mensajes de errores
 $errores = [];
 
-$titulo = $pijama['titulo'];
-$descripcion = $pijama['descripcion'];
-$precio =  $pijama['precio'];
-$categoriaId =  $pijama['id_categoria'];
-$imagenPijama = $pijama['imagen'];
-
-
+$titulo = '';
+$descripcion = '';
+$precio = '';
+$categoriaId = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // echo "<pre>";
@@ -53,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $precio = mysqli_real_escape_string($db, $_POST['precio']);
     $categoriaId =  mysqli_real_escape_string($db, $_POST['categoria']);
 
-    //Asignar files hacia la variable
+    // Asignar files hacia una variable
     $imagen = $_FILES['imagen'];
 
 
@@ -69,7 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$categoriaId) {
         $errores[] =  "Debes escoger una categoria de la pijama";
     }
-
+    if (!$imagen['name'] || $imagen['error']) {
+        $errores[] = 'La Imagen es Obligatoria';
+    }
     //Validar por tamaño
     $medida = 1000 * 1000;
 
@@ -77,56 +60,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = 'La imagen es muy pesada';
     }
 
-    $nombreImagen = '';
-
     //reviar que el arreglo de errores este vacio
     if (empty($errores)) {
-
+        /** SUBIDA DE ARCHIVOS */
 
         // Crear carpeta
-        $carpetaImagenes = '../../imagenes/';
+        $carpetaImagenes = './imagenes/';
 
         if (!is_dir($carpetaImagenes)) {
             mkdir($carpetaImagenes);
         }
 
-        $nombreImagen = '';
+        // Generar un nombre único
+        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
-        /** SUBIDA DE ARCHIVOS */
 
-        if ($imagen['name']) {
-            // Eliminar la imagen previa
-
-            unlink($carpetaImagenes . $propiedad['imagen']);
-
-            // // Generar un nombre único
-            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-
-            // // Subir la imagen
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
-        } else {
-            $nombreImagen = $pijama['imagen'];
-        }
+        // Subir la imagen
+        move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
 
 
         //Insertar en la bd
-        $query = "UPDATE pijamas SET titulo = '${titulo}', imagen = '${nombreImagen}', descripcion = '${descripcion}', precio = ${precio}, id_categoria = ${categoriaId} WHERE id_pijama = ${id} ";
+        $query = "INSERT INTO pijamas (titulo, imagen, descripcion, precio, id_categoria) VALUES ( '$titulo','$nombreImagen', '$descripcion', '$precio', '$categoriaId' )";
 
-        echo $query;
-
+        // echo $query;
         $resultado = mysqli_query($db, $query);
         if ($resultado) {
             //Redireccionar el usuario
-            header('Location: ../../admin?resultado=2');
+            header('Location: ./admin.php?resultado=1');
         }
     }
 }
 
-include '../../includes/templates/header.php';
+include './header.php';
 ?>
 
 <main class="container py-4">
-    <h1 class="text-center">ACTUALIZAR PIJAMA</h1>
+    <h1 class="text-center">CREAR NUEVA PIJAMA</h1>
 
     <?php foreach ($errores as $error) : ?>
         <div class="alerta error mb-2">
@@ -135,9 +104,9 @@ include '../../includes/templates/header.php';
 
     <?php endforeach; ?>
 
-    <a href="../../admin/index.php" class="boton">Volver</a>
+    <a href="./admin.php" class="boton">Volver</a>
 
-    <form class="card card-body" method="POST" enctype="multipart/form-data">
+    <form class="card card-body" method="POST" action="./crear.php" enctype="multipart/form-data">
         <fieldset>
             <legend>Informacion General</legend>
 
@@ -147,9 +116,7 @@ include '../../includes/templates/header.php';
             </div>
             <div class="form-group">
                 <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" name="imagen" class="form-control" accept="image/jpg, image/png, image/jpeg">
-
-                <img src="../../imagenes/<?php echo $pijama['imagen'] ?>" alt="imagen pijama" width="200">
+                <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen" class="form-control">
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripcion:</label>
@@ -174,10 +141,10 @@ include '../../includes/templates/header.php';
 
             <br>
         </fieldset>
-        <input type="submit" value="ACTUALIZAR PIJAMA" class="boton">
+        <input type="submit" value="CREAR PIJAMA" class="boton">
     </form>
 </main>
 
 <?php
-include '../../includes/templates/footer.php';
+include './footer.php';
 ?>
