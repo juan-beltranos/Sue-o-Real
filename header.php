@@ -23,14 +23,16 @@ $auth = $_SESSION['login'] ?? false;
   <!-- Just an image -->
   <header class="header">
     <nav class="navbar navbar-expand-lg">
-      <div class="container ">
+      <div class="container text-center">
         <a class="navbar-brand" href="./index.php">
-          <img src="./public/img/logo.png" alt="logo" width="100" /> <span class="titulo">LOS MEJORES PRECIOS DEL MERCADO</span> </a>
+          <img src="./public/img/logo.png" alt="logo" width="100" /> </a>
+       
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon">
             <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
           </span>
         </button>
+        <span class="titulo text-light">LOS MEJORES PRECIOS DEL MERCADO</span> 
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav ">
             <li class="nav-item">

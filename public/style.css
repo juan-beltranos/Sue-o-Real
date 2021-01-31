@@ -53,6 +53,8 @@ span .navbar-toggler-icon {
   background-color: rgb(97, 32, 97) !important;
 }
 .titulo {
+  color: white;
+  font-size: 1rem;
   font-family: "Big Shoulders Display", cursive;
   font-family: "Dancing Script", cursive;
 }

@@ -54,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = 'La Imagen es Obligatoria';
     }
     //Validar por tamaño
-    $medida = 1000 * 1000;
+    //  $medida = 1000 * 1000;
 
-    if ($imagen['size'] > $medida) {
-        $errores[] = 'La imagen es muy pesada';
-    }
+    // if ($imagen['size'] > $medida) {
+    //  $errores[] = 'La imagen es muy pesada';
+    //  }
 
     //reviar que el arreglo de errores este vacio
     if (empty($errores)) {
