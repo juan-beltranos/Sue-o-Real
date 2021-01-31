@@ -1,3 +1,4 @@
+
 a {
   color: white;
 }
@@ -50,4 +51,8 @@ span .navbar-toggler-icon {
 }
 .nav-link:hover {
   background-color: rgb(97, 32, 97) !important;
+}
+.titulo {
+  font-family: "Big Shoulders Display", cursive;
+  font-family: "Dancing Script", cursive;
 }

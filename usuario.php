@@ -1,11 +1,11 @@
 <?php
 
 // Importar la conexión
-require 'includes/config/database.php';
+require './includes/config/database.php';
 $db = conectarDB();
 
 // Crear un email y password
-$email = " sueñoreal2@gmail.com";
+$email = "suenoreal2@gmail.com";
 $password = "2021sueñoreal";
 
 $passwordHash = password_hash($password, PASSWORD_BCRYPT);

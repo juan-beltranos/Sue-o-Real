@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <br>
   <br>
   <table class="table">
-    <thead class="table-info text-center">
+    <thead class="table-danger text-center">
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Titulo</th>

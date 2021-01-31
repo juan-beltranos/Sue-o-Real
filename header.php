@@ -13,6 +13,8 @@ $auth = $_SESSION['login'] ?? false;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300&family=Dancing+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./public/style.css" />
   <title>Sueño Real</title>
 </head>
@@ -23,7 +25,7 @@ $auth = $_SESSION['login'] ?? false;
     <nav class="navbar navbar-expand-lg">
       <div class="container ">
         <a class="navbar-brand" href="./index.php">
-          <img src="./public/img/logo.png" alt="logo" width="100" />  </a>
+          <img src="./public/img/logo.png" alt="logo" width="100" /> <span class="titulo">LOS MEJORES PRECIOS DEL MERCADO</span> </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon">
             <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>

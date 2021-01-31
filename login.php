@@ -1,7 +1,5 @@
-<?php include './header.php'; ?>
-
 <?php
-require 'includes/config/database.php';
+require './includes/config/database.php';
 $db = conectarDB();
 
 $errores = [];
@@ -27,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Revisar si el usuario existe.
         $query = "SELECT * FROM usuarios WHERE email = '${email}' ";
         $resultado = mysqli_query($db, $query);
+        var_dump($resultado);
 
         if ($resultado->num_rows) {
             // Revisar si el password es correcto
@@ -41,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //Llenar el arreglo de la sesion
                 $_SESSION['usuario'] = $usuario['email'];
                 $_SESSION['login'] = true;
-                header('Location: admin.php');
+                header('Location: ./admin.php');
             } else {
                 $errores[] = "La contraseña es incorrecta";
             }
@@ -51,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+<?php include './header.php'; ?>
 
 <main class="container col-md-4 py-2">
     <h1 class="text-center">Iniciar Sesion</h1>
